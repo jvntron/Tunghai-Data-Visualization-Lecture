@@ -1,3 +1,6 @@
+jb
+Tunghai University
+
 # Data Visualization Analysis
 
 ## Information
