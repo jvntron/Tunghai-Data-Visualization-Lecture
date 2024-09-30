@@ -46,4 +46,19 @@ ggplot(diamonds, aes (x = carat)) +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
 
 # Read Data from CSV
-df <- read.csv('Accidents.csv')
+df <- read.csv('Banten_Climate.csv')
+
+# Draw a chart from CSV
+ggplot(df, aes (x = Month, y = Temperature)) + 
+  geom_col() +
+  scale_x_continuous(breaks = seq_along(month.name), labels = month.name) +
+  labs(title="Banten Annual Average Temperature",
+       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+  theme(plot.title = element_text(hjust= 0.5, size = 20))
+
+ggplot(df, aes (x = Month, y = Humidity)) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 1, to = 12, by = 1)) +
+  labs(title="Banten Annual Average Humidity",
+       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+  theme(plot.title = element_text(hjust= 0.5, size = 20))
