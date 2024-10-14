@@ -77,3 +77,13 @@ ggplot(birthwt_mod, aes(x = bwt)) +
        caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
   theme(plot.title = element_text(hjust= 0.5, size = 15))
 
+#add colors and transparency, the transparency command is the alpha, 0.4 = 40%
+
+ggplot(birthwt_mod, aes(x=bwt, fill=smoke)) +
+  geom_histogram(position ="identity", alpha= 0.4) +
+  labs(title="Birth Weight",
+       x= 'Birth weight',
+       y = 'Count', 
+       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+  theme(plot.title = element_text(hjust= 0.5, size = 15))
+
