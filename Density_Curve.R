@@ -72,7 +72,7 @@ ggplot(birthwt_mod, aes(x=bwt, fill=factor(smoke))) +
   scale_fill_discrete(labels = c("Non Smoking", "Smoking")) +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
 
-#  scale_fill_manual(values = c("pink", "lightblue")) for manual change of colors
+# scale_fill_manual(values = c("pink", "lightblue")) for manual change of colors
 # scale_fill_discrete (labels = c(...)) can also be used to change the label of the legend
 #
 # howevere using scale_fill_manual you can also change the label, but you have to add the
