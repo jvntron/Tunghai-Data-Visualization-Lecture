@@ -11,7 +11,7 @@ This R code creates a data visualization of the **Iris dataset** using the `ggpl
 
 ## **Step by Step Process**
 
-## 1. Load library
+## 1. Load Required Library
 
 ```{r}
 #| output: false
@@ -23,7 +23,7 @@ library(ggplot2)
 
 ------------------------------------------------------------------------
 
-## 2. Draw scatter plot
+## 2. Create Initial Plot
 
 ```{r}
 #| output: false

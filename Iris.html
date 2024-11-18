@@ -108,8 +108,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-by-step-process" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-process"><strong>Step by Step Process</strong></h2>
 </section>
-<section id="load-library" class="level2">
-<h2 class="anchored" data-anchor-id="load-library">1. Load library</h2>
+<section id="load-required-library" class="level2">
+<h2 class="anchored" data-anchor-id="load-required-library">1. Load Required Library</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -118,8 +118,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <hr>
 </section>
-<section id="draw-scatter-plot" class="level2">
-<h2 class="anchored" data-anchor-id="draw-scatter-plot">2. Draw scatter plot</h2>
+<section id="create-initial-plot" class="level2">
+<h2 class="anchored" data-anchor-id="create-initial-plot">2. Create Initial Plot</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  iris_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y =</span> Sepal.Width))<span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
