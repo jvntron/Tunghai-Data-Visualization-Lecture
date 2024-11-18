@@ -1,10 +1,11 @@
 ---
-title: "Iris"
+title: "Iris Tutorial"
 author: "JB"
 format: html
 ---
 
-This R code creates *data visualization* of **Iris dataset** using `ggplot2` package.
+This R code creates a data visualization of the **Iris dataset** using the `ggplot2` package, with the following features:
+
 
 ------------------------------------------------------------------------
 
