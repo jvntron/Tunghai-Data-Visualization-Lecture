@@ -1,0 +1,127 @@
+---
+title: "Iris"
+author: "JB"
+format: html
+---
+
+This R code creates *data visualization* of **Iris dataset** using `ggplot2` package.
+
+------------------------------------------------------------------------
+
+## **Step by Step Process**
+
+## 1. Load library
+
+```{r}
+#| output: false
+
+library(ggplot2)
+```
+
+-   `ggplot2`: A popular package for creating elegant and customizable visualizations in R.
+
+------------------------------------------------------------------------
+
+## 2. Draw scatter plot
+
+```{r}
+#| output: false
+
+  iris_plot <- ggplot(iris, aes(x=Sepal.Length, y = Sepal.Width))+
+  geom_point() +
+  facet_grid(. ~ Species)
+```
+
+-   `ggplot(iris, aes(...))`
+    -   Initializes the plot using the `iris` dataset.
+    -   Maps the `Sepal.Length` to the x-axis and `Sepal.Width` to the y-axis.
+-   `geom_point`:
+    -   Adds scatter points to the plot.
+-   `facet_grid(. ~ Species)` :
+    -   Splits the plot into separate panels for each `Species`(setosa, versicolor, virginica).
+
+------------------------------------------------------------------------
+
+## 3. Create a Data Frame for Custom Labels
+
+```{r}
+#| output: false
+
+g_labels <- data.frame(Species = c("setosa", "versicolor", "virginica"), 
+                       label=c("Setosa", "Versicolor", "Virginica"))
+```
+
+-   `f_labels:`
+    -   A data frame that contains custom labels (`label`) for each `Species`.
+
+------------------------------------------------------------------------
+
+## 4. Add Custom Labels to the Plot
+
+```{r}
+#| output: false
+
+iris_plot +
+  geom_text(x = 7, y = 4, aes(label = label), data = g_labels) 
+```
+
+-   `geom_text(...)`:
+    -   Adds text labels to the plot.
+    -   `x = 7`, `y = 4`: Specifies the position for the labels in each facet.
+    -   `aes(label = label)`: Maps the `label` column from `f_labels` to the text labels.
+
+___
+
+## 5. Add Title and Axis Labels
+
+```{r}
+#| output: false
+
+labs(title = "Iris",
+       x = "Sepal length",
+       y = "Sepal width",
+       caption = "By JB, Data Visualization course, Tunghai University, 2024")
+```
+
+-   `labs(...)`:
+    -   Sets the plot’s title (`title`), x-axis label (`x`), y-axis label (`y`), and a caption (`caption`).
+
+## 6. Customize Plot Theme
+
+```{r}
+#| output: false
+
+  theme(plot.title = element_text(hjust = 0.5, size = 20))
+```
+
+-   `theme(...)`:
+    -   Modifies visual properties of the plot.
+    -   `plot.title = element_text(hjust = 0.5, size = 20)`:
+        -   Centers the title (`hjust = 0.5`).
+        -   Increases the title font size to `20`.
+
+------------------------------------------------------------------------
+
+## Your result should be like this
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+  iris_plot <- ggplot(iris, aes(x=Sepal.Length, y = Sepal.Width))+
+  geom_point() +
+  facet_grid(. ~ Species)
+
+g_labels <- data.frame(Species = c("setosa", "versicolor", "virginica"), 
+                       label=c("Setosa", "Versicolor", "Virginica"))
+
+iris_plot +
+  geom_text(x = 7, y = 4, aes(label = label), data = g_labels) +
+  labs(title = "Iris",
+       x = "Sepal length",
+       y = "Sepal width",
+       caption = "By JB, Data Visualization course, Tunghai University, 2024")+
+  theme(plot.title = element_text(hjust = 0.5, size = 20))
+```
+
+## 
