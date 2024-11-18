@@ -1,5 +1,5 @@
 ---
-title: "Iris Tutorial"
+title: "Iris tutorial"
 author: "JB"
 format: html
 ---
