@@ -92,6 +92,7 @@ ggplot(mtcars, aes(wt,mpg,label=rownames(mtcars))) +
   geom_point()+
   geom_text()
 
+library()
 library(graphics)
 library(ggrepel)
 ggplot(mtcars, aes(wt,mpg))+

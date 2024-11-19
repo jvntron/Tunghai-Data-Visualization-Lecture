@@ -1,0 +1,90 @@
+---
+title: "Box Plot Tutorial"
+author: "JB"
+format: html
+editor: visual
+---
+
+This R code creates a data visualization of the **Iris dataset** using the `ggplot2` package, with the following features:
+
+___
+
+## 1. Load the necessary package
+```{r}
+#| output: false
+
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+```
+-   `ggplot2`: A popular package for creating elegant and customizable visualizations in R.
+-   `dplyr`: A grammar of data manipulation, used here for modifying the dataset.
+
+___
+## 2. Prepare and Modify the Dataset
+```{r}
+#| output: false
+
+pg_mod <- PlantGrowth %>%
+  mutate(h1 = recode(group, "ctrl" = "no", "trt1" = "no", "trt2" = "yes"))
+```
+- `PlantGrowth`: A built-in R dataset containing information about plant growth under different treatment groups.
+- `mutate()`: Adds a new variable or modifies an existing one.
+- `recode()`: Reclassifies values of the group variable:
+    - `ctrl` and `trt1` are recoded to `no`.
+    - `trt2` is recoded to `yes`.
+- `Result`: A new column h1 is created, indicating whether the treatment condition corresponds to `yes` or `no`.
+
+___
+
+## 3. Initialize the Plot
+```{r}
+#| output: false
+
+ggplot(pg_mod, aes(x = group, y = weight, fill = h1))
+```
+- `ggplot(pg_mod)`: Initializes the ggplot object with the modified dataset pg_mod.
+- `aes()`: Specifies the aesthetic mappings:
+  - `x = group`: The `group` variable (categorical) is mapped to the x-axis.
+  - `y = weight`: The `weight` variable (numeric) is mapped to the y-axis.
+  - `fill = h1`: The `h1` variable is used to determine the fill color of the boxes.
+
+___
+
+## 4. Add a Boxplot Layer
+```{r}
+#| output: false
+
+geom_boxplot ()
+```
+- `geom_boxplot()`: Adds a boxplot to the plot, showing the distribution of `weight` for each group.
+
+___
+## 5. Customize Fill Colors
+```{r}
+#| output: false
+
+scale_fill_manual (values = c("grey85","#FFDDCC"), guide = FALSE)
+```
+- `scale_fill_manual()`: Manually sets the colors for the fill aesthetic:
+  -`grey85` for `no`.
+  - `#FFDDCC` for `yes`.
+- `guide = FALSE`: Hides the legend for the fill aesthetic.
+
+___
+## 6. Add Titles and Labels
+```{r}
+#| output: false
+
+  labs(title = "Group and Weight",
+       x = 'Group',
+       y = 'Weight',
+       caption = "By JB, Data Visualization course, Tunghai University, 2024")+
+  theme(plot.title = element_text(hjust = 0.5, size = 20))
+```
+- `labs()`: Adds textual elements to the plot:
+  - `title`: A centered title for the plot.
+  - `x`: Label for the x-axis.
+  - `y`: Label for the y-axis.
+  - `caption`: A footnote
+
