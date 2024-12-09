@@ -1,0 +1,9 @@
+---
+title: "Legends"
+author: "JB"
+toc: true
+number-sections: true
+format: 
+  html:
+    embed-resources: true
+---
