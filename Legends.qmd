@@ -104,8 +104,10 @@ grid.arrange(p1, p2, p3, p4, ncol=2,
              top='Chainging Position of Legend', bottom = 'JB, DV, THU 2024')
 ```
 
-# Change Color of Legend
+# Change Position of Legend
 
+- Using the `legend.position` line we are able to change the position the legend, and using the `c(x, y)` to set the position
+  - the graph below shows the legend position in `c(.9, .3)`
 ```{r}
 ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -116,34 +118,14 @@ ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
         legend.position = c(.9, .3))
 ```
 
-```{r}
-ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
-  geom_boxplot() +
-  scale_fill_brewer(palette = "Pastel2") +
-  ggtitle('Change Location of Legend') +
-  labs(caption = 'JB, DV, THU 2024') +
-  theme(plot.title = element_text(hjust=0.5),
-        legend.position = c(1, 0))
-```
-
-```{r}
-ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
-  geom_boxplot() +
-  scale_fill_brewer(palette = "Pastel2") +
-  ggtitle('Change Location of Legend') +
-  labs(caption = 'JB, DV, THU 2024') +
-  theme(plot.title = element_text(hjust=0.5),
-        legend.position = c(1, 0),
-        legend.justification = c(1, 0))
-```
-
-
 # Change Border of Legend
+Using `legend.background` line, we are able to change the `color` of the border using `color` 
 ```{r}
 ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
   scale_fill_brewer(palette = "Pastel2") +
   ggtitle('Change Border of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
   theme(plot.title = element_text(hjust=0.5),
         legend.position = c(0.85, 0.2),
         legend.background = element_rect(fill = 'white',
@@ -151,6 +133,7 @@ ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
 ```
 
 # Change Background of Legend
+As previously mentioned, by using `fill` we can change the `background` of the legend
 ```{r}
 ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -163,7 +146,25 @@ ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
         legend.key = element_blank())
 ```
 
+Optionally, we can also change the colors using the Palette provided by from `ColorBrewer` provided in the  `ggplot2`. Changing the `palette` will change the color of the chart
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel6") +
+  ggtitle('Change Background of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(0.85, 0.2),
+        legend.background = element_blank(),
+        legend.key = element_blank())
+```
+
+The `palette` provided are 
+
+![ggplot2 Palette](palette.png)
+
 # Change Order of Items in Legend
+To change the order of the items in Legend, we can use `scale_fill_discrete` to add limits so that the items will be limited to the `order` that we want
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -176,6 +177,7 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Reverse Order of Items in Legend
+To reverse the order of Items in Legend we use the line `guide_legend(reverse = TRUE)`
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -188,6 +190,7 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Change Legend Title
+To change the Legend Title, we can use `plot.title` in `theme` and adding the `fill = 'Legend Title'`
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -200,6 +203,11 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Change Appearance of Legend Title
+- To change the appearance, we can add `legend.title` in the `theme` section and change the following:
+  - `face`: To change style of the text (`bold`, `italic`, `underline`)
+  - `family`: To change the Font Style
+  - `color`: To change the `color` of the text
+  - `size`: To change the `size` of the text
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -214,6 +222,7 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Remove Legend Title
+`guide_legend(title = NULL` is used to remove the Legend Title
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -226,6 +235,7 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Change Labels in Legend
+To change the Labels in the Legend, we first have to make the dataset using the `c('Legend 1', 'Legend 2', 'Legend 3')` line. Next, we can use `scale_fill_discrete(labels = c(x,y,z)` to change the labels inside the legend
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -241,6 +251,11 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Change Apperarence of Legend Label
+- Similarly to changing the appearance of the Legend Title, we use `theme` to change the appearance, with the additional line of `legend.text`
+  - `face`: To change style of the text (`bold`, `italic`, `underline`)
+  - `family`: To change the Font Style
+  - `color`: To change the `color` of the text
+  - `size`: To change the `size` of the text
 ```{r}
 p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
@@ -255,6 +270,7 @@ grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
 ```
 
 # Legend with Multiple Variables
+To add multiple variables in a chart, we can use add `aes` in `ggplot` to plot the dataset of `heightweight` and use `aes(size = weightLb)` to represent another variable that changed the size of the point accordingly
 ```{r}
 library(gcookbook)
 ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
@@ -264,6 +280,7 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
 ```
 
 # Resize the Point
+Using the `size = weightLb` we can change the size of the point from `1` (being the smallest) to `4` being the largest in `geom_point`
 ```{r}
 library(gcookbook)
 ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
@@ -273,6 +290,9 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
 ```
 
 # Change Legend Title
+In the chart with multiple variable, the `color` represent `Male` or `Female` and the `size` represent the `Weight`.
+
+In order to change the Legend Title, we use `labs` line and change the name by using of the `color` variable `colour = "Male/Female"` and `size` variable by adding `size = "Weight\n(pounds)"`
 ```{r}
 library(gcookbook)
 ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
@@ -283,6 +303,7 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
 ```
 
 # Change Labels in Legend
+`scale_color_discrete(labels = c('Female','Male')`: Using the `scale_color_discrete` we can change the `labels` in the `legend` to `Female` and `Male`
 ```{r}
 library(gcookbook)
 ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
