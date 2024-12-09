@@ -48,3 +48,248 @@ p3 <- ggplot(PlantGrowth, aes(x = group, y = weight, color = group)) +
 grid.arrange(p1,p2,p3,ncol=3,top='Add Legend', bottom = 'JB, DV, THU 2024')
 ```
 
+# Remove Legend
+The legend is removed by `guides(fill = FALSE)`
+
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) + 
+  geom_boxplot() +
+  guides(fill = FALSE) +
+  ggtitle('Remove Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5))
+```
+
+# Change Color of Legend
+`scale_fill_brewer(palette = "Pastel2")` is used to change the color of the legend
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Color of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5))
+```
+
+# Change Position of Legend
+`legend.postion` in `theme` is used to change the position of the legend
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Color of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = 'top')
+```
+
+# Practice
+- Change legend position to top, bottom, left, and right
+  - `legend.position = 'top'`: To change the position of the legend to `top`
+  - `legend.position = 'bottom'`: To change the position of the legend to `bottom`
+  - `legend.position = 'left'`: To change the position of the legend to `left`
+  - `legend.position = 'right'`: To change the position of the legend to `right``
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Color of Legend') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = 'top')
+p2 <- p1 + theme(legend.position = 'bottom')
+p3 <- p1 + theme(legend.position = 'left')
+p4 <- p1 + theme(legend.position = 'right')
+
+grid.arrange(p1, p2, p3, p4, ncol=2,
+             top='Chainging Position of Legend', bottom = 'JB, DV, THU 2024')
+```
+
+# Change Color of Legend
+
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Color of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(.9, .3))
+```
+
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Location of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(1, 0))
+```
+
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Location of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(1, 0),
+        legend.justification = c(1, 0))
+```
+
+
+# Change Border of Legend
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Border of Legend') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(0.85, 0.2),
+        legend.background = element_rect(fill = 'white',
+                                         color = 'black'))
+```
+
+# Change Background of Legend
+```{r}
+ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Pastel2") +
+  ggtitle('Change Background of Legend') +
+  labs(caption = 'JB, DV, THU 2024') +
+  theme(plot.title = element_text(hjust=0.5),
+        legend.position = c(0.85, 0.2),
+        legend.background = element_blank(),
+        legend.key = element_blank())
+```
+
+# Change Order of Items in Legend
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Change Order of Legend') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + scale_fill_discrete(limits = c('trt1', 'trt2', 'crtl'))
+
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Reverse Order of Items in Legend
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Reversing Order of Items') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + guides(fill = guide_legend(reverse = TRUE))
+
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Change Legend Title
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Changing Legend Title') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + labs(fill = 'Condition')
+
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Change Appearance of Legend Title
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Changing Legend Title') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + theme(legend.title = element_text(face = 'italic',
+                                             family = 'Times',
+                                             color = 'red',
+                                             size = 14))
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Remove Legend Title
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Removing Legend Title') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + guides(fill = guide_legend(title = NULL))
+
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Change Labels in Legend
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Change Labels in Legend') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + 
+  scale_fill_discrete(labels = c('Control',
+                                 'Treatment 1',
+                                 'Treatment 2'))
+
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Change Apperarence of Legend Label
+```{r}
+p1 <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+  geom_boxplot() +
+  ggtitle('Changing Legend Title') +
+  theme(plot.title = element_text(hjust=0.5))
+
+p2 <- p1 + theme(legend.text = element_text(face = 'italic',
+                                             family = 'Times',
+                                             color = 'red',
+                                             size = 14))
+grid.arrange(p1, p2, ncol = 2, bottom = 'JB, DV, THU 2024')
+```
+
+# Legend with Multiple Variables
+```{r}
+library(gcookbook)
+ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
+  geom_point(aes(size = weightLb)) +
+  scale_size_continuous(range = c(1, 4)) +
+  ggtitle('Legend with Multiple Variables')
+```
+
+# Resize the Point
+```{r}
+library(gcookbook)
+ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
+  geom_point(aes(size = weightLb)) +
+  labs(colour = "Male/Female", size = "Weight\n(pounds)") +
+  ggtitle('Legend with Multiple Variables')
+```
+
+# Change Legend Title
+```{r}
+library(gcookbook)
+ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
+  geom_point(aes(size = weightLb)) +
+  scale_size_continuous(range = c(1, 4)) +
+  labs(colour = "Male/Female", size = "Weight\n(pounds)") +
+  ggtitle('Legend with Multiple Variables')
+```
+
+# Change Labels in Legend
+```{r}
+library(gcookbook)
+ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = sex)) +
+  geom_point(aes(size = weightLb)) +
+  scale_size_continuous(range = c(1, 4)) +
+  labs(colour = "Male/Female", size = "Weight\n(pounds)") +
+  scale_color_discrete(labels = c('Female','Male')) +
+  ggtitle('Legend with Multiple Variables')
+```
+
