@@ -1,6 +1,6 @@
 ---
 title: 'Data Visualization Analysis'
-author: 'JB S10920621'
+author: 'JB'
 date: '2024/12/20'
 toc: true
 number-sections: true
@@ -28,6 +28,27 @@ These packages form the foundation of this tutorial, as most examples and datase
 library(ggplot2)
 library(gcookbook)
 ```
+
+___
+
+# Labels
+Before we start with the analysis, there is an important function that will be used throughout this tutorial, which is the `labs()` funtion. The `labs()` function serve as a tool to label things inside the chart provided by `ggplot2`
+
+```{r}
+#| output: false
+
+labs(title='My Chart', 
+     x='x-axis label', 
+     y='y-axis label', 
+     captions='Chart Captions')
+```
+
+The following is an explanation to the code above:
+
+- `title='My Chart'`= Add text to the title (`My Chart`) of the chart
+- `x= 'x-axis label'`= Changes the label in the x - axis
+- `y= 'y-axis label'`= Changes the label in the y - axis
+- `captions='Chart Captions'`= Add captions (`Chart Captions`) to the bottom right of the chart
 
 ___
 
@@ -120,17 +141,17 @@ In order to find the correlation between the Biochemical Oxygen Demand(`BOD`) ov
 ggplot(BOD, aes (x = Time, y = demand)) + 
   geom_line() +
   labs(title= "Line Chart", 
-       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+       caption = 'By JB, DV, THU 2024') +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
 ```
 It initializes a ggplot with the dataset `BOD`
 
 `aes(x = Time, y = demand)` specifies the aesthetics:
 
-- `x = Time:` Assign the `Time` variable to the x-axis (numerical data, representing time in days).
-- `y = demand:` Assign the `demand` variable to the y-axis (numerical data, representing biochemical oxygen demand).
+- `x = Time`: Assign the `Time` variable to the x-axis (numerical data, representing time in days).
+- `y = demand`: Assign the `demand` variable to the y-axis (numerical data, representing biochemical oxygen demand).
 
-`geom_line():`
+`geom_line()`
 
 - Adds a line geometry to the plot.
 - `geom_line()` connects the data points sequentially with straight lines, illustrating how oxygen demand changes over time.
@@ -151,7 +172,6 @@ ggplot(BOD, aes (x = Time, y = demand)) +
 
 - Adds a point geometry to the plot.
 - `geom_point()` plots individual data points, making it useful for visualizing the distribution of data or highlighting specific values in a dataset.
-
 ___
 
 # Combining Line Chart and Scatter Plot
@@ -314,7 +334,7 @@ Adding colors and Changing transparency:
 ___
 
 # Facets
-In this section, we will discuss on how to display multiple chart
+In this section, we will discuss on how to display multiple chart using `facets`
 
 Firstly, necessary R packages need to be loaded:
 
@@ -395,7 +415,7 @@ Once we have created the chart, we can create a temporary dataset `Sepal` and `P
 ```{r}
 grid.arrange(Sepal, Petal, ncol=2, top= 'Iris Dataset', bottom='By JB, DV, THU 2023')
 ```
-
+Using the `grid.arrange` function, we are able to display multiple chart from the same or different dataset
 - `ncol`: To determine the amount of column needed in the grid
 - `top`: To add `text` on the `top` section of the grid
 - `bottom`: To add `text` on the `bottom` section of the grid
@@ -576,7 +596,7 @@ ggplot(df, aes(x = value, fill = variable)) +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
 ```
 
-By using `position()` we are able to make the histograms to overlap each other rather than stacking them. Hence producing a multigroup histogram
+By using `position = identity` we are able to make the histograms to overlap each other rather than stacking them. Hence producing a multigroup histogram
 
 ___
 
@@ -590,16 +610,18 @@ ggplot(faithful, aes(x=waiting)) +
   labs(title="Density Curve",
        x= 'Waiting',
        y='Density',
-       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+       caption = 'By JB, DV, THU 2024') +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
-
 ```
 Unlike the other chart, we can see that a Density curves does not include a `y-axis`, this is because density curve displays a smooth estimate of the data's distribution, offering insights into its shape and spread.
 
 - `ggplot(faithful, aes(x = waiting))`: Initializes a ggplot with the `faithful` dataset, mapping the waiting variable to the x-axis.
 - `geom_density(fill = "blue", alpha = .2)`: Adds a density curve to the plot, with a blue fill and 20% transparency for better visualization.
 - `xlim(35, 105)`: Limits the x-axis to a range between 35 and 105.
+___
 
+# Histogram and Density chart
+After learning the histogram and density chart, we can combine a histogram and a density curve for better visualization. The histogram shows the raw frequency of observations, while the density curve overlays this with a smooth approximation.
 ```{r}
 #| warning: false
 #| message: false
@@ -607,19 +629,16 @@ Unlike the other chart, we can see that a Density curves does not include a `y-a
 ggplot(faithful, aes(x=waiting, y= ..density..)) +
   geom_histogram(fill = "cornsilk", color = "grey60", size = .2) +
   geom_density()+
-  labs(title="Density Curve",
+  labs(title="Histogram and Density Curve",
        x= 'Waiting',
        y='Density',
-       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+       caption = 'By JB, DV, THU, 2024') +
   theme(plot.title = element_text(hjust= 0.5, size = 20))
 ```
-Here, we combine a histogram and a density curve for better visualization. The histogram shows the raw frequency of observations, while the density curve overlays this with a smooth approximation.
+Similarly when combining multiple geometries (`geom_`) we can add `geom_histogram` before `geom_density` in order for the density curve to be displayed in front of histogram
 
-Explanation:
 - `aes(x = waiting, y = ..density..)`: Maps waiting to the `x-axis` and ensures the `y-axis` represents the density of data points.
 - `geom_histogram(fill = "cornsilk", color = "grey60", size = .2)`: Adds a histogram with a cornsilk fill, grey outlines, and thin bars.
-
-___
 
 # Box plot
 In this section, we create a box plot to visualize the distribution of `weight` across different group categories in the `PlantGrowth` dataset. 
@@ -657,7 +676,7 @@ ggplot(my_faithful, aes(x = eruptions, y = waiting, color = group)) +
        x = 'Eruptions', 
        y = 'Waiting',
        color = "Groups",
-       caption = 'By JB, Data Vizualization Course, Tunghai University, 2024')+
+       caption = 'By JB, DV, THU 2024')+
   theme(plot.title = element_text(hjust = 0.5, size=20))+
   annotate("text", x = 3, y = 48, label = "Group 1") +
   annotate( "text", x = 4.5, y = 66, label = "Group 2")
@@ -741,6 +760,8 @@ grid.arrange(t1, t2, t3, t4, t5, t6, t7, t8, t9,nrow= 3, ncol=3, top='ggplot2 Th
   - Displays all the visual elements of a plot to help identify alignment and layout issues.
 
 ```{r}
+#| warning: false
+
 ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
   geom_boxplot() +
   labs(title= 'Plant Growth',
@@ -770,7 +791,7 @@ Let's use the chart from previous section
 ggplot(BOD, aes (x = Time, y = demand)) + 
   geom_line() +
   labs(title= "Line Chart", 
-       caption = 'By JB, Data Visualization Course, Tunghai University, 2024') +
+       caption = 'By JB, DV, THU 2024') +
   theme(plot.title = element_text(hjust= 0.5, size = 20, colour= 'red'))
 ```
 Here as we can see that we have added `theme(plot.title = element_text(hjust= 0.5, size = 20, colour= 'red')` to our preferance, and we want to apply to other chart as well, but we have to write the function again.
@@ -783,7 +804,7 @@ ct <-  theme(plot.title = element_text(hjust= 0.5, size = 20, colour= 'red'))
 BOD <- ggplot(BOD, aes (x = Time, y = demand)) + 
   geom_line() +
   labs(title= "Line Chart", 
-       caption = 'By JB, Data Visualization Course, Tunghai University, 2024')
+       caption = 'By JB, DV, THU 2024')
 
 BOD + ct
 ```
